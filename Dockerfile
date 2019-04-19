@@ -12,9 +12,9 @@ ENV LC_ALL en_US.UTF-8
 RUN apt-get update && \
   apt-get install -y git supervisor python-pip curl && \
   pip install supervisor-stdout && \
-  sed -i 's/^\(\[supervisord\]\)$/\1\nnodaemon=true/' /etc/supervisor/supervisord.conf && \
-  curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash - 
-RUN apt-get install -y nodejs
+  sed -i 's/^\(\[supervisord\]\)$/\1\nnodaemon=true/' /etc/supervisor/supervisord.conf
+RUN curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash - && \
+  apt-get install -y nodejs
 
 ADD sv_stdout.conf /etc/supervisor/conf.d/
 
