@@ -27,8 +27,15 @@ RUN ln -s /opt/strider/src/bin/strider /usr/local/bin/strider
 USER strider
 ENV HOME /home/strider
 
-RUN git clone --branch $STRIDER_TAG --depth 1 $STRIDER_REPO /opt/strider/src && \
-  cd /opt/strider/src && npm install && npm run build
+
+# RUN git clone --branch $STRIDER_TAG --depth 1 $STRIDER_REPO /opt/strider/src && \
+#   cd /opt/strider/src && npm install && npm run build
+## Aaron: above command is replaced with below command
+# RUN cd /opt/strider/src && npm install && npm run build
+# below is used to run npm install independently
+# docker run -it --rm -v "$PWD":/usr/src/myclient -w /usr/src/myclient --entrypoint /bin/bash node:10.15.1 -c "npm install && npm run build"
+
+
 COPY start.sh /usr/local/bin/start.sh
 ADD strider.conf /etc/supervisor/conf.d/strider.conf
 EXPOSE 3000

@@ -1,4 +1,5 @@
 chown -R strider:strider /home/strider
+cd /opt/strider/src && npm install && npm run build
 
 if [[ -n $GENERATE_ADMIN_USER ]]; then
   ADMIN="admin@${FQDN-example.org}"
